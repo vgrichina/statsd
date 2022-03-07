@@ -17,15 +17,9 @@ RUN npm install && npm cache clean --force
 # Copy required src (see .dockerignore)
 COPY . /usr/src/app
 
-# Set graphite hostname to "graphite"
-RUN \
-  ls -la && \
-  cp -v exampleConfig.js config.js && \
-  sed -i 's/graphite.example.com/graphite/' config.js
-
 # Expose required ports
 EXPOSE 8125/udp
 EXPOSE 8126
 
 # Start statsd
-ENTRYPOINT [ "node", "stats.js", "config.js" ]
+ENTRYPOINT [ "node", "stats.js" ]
